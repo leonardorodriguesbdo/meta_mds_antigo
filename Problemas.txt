@@ -1,0 +1,28 @@
+Problemas no tensorflow
+ - https://stackoverflow.com/questions/66964492/importerror-cannot-import-name-get-config-from-tensorflow-python-eager-conte
+ * https://www.datasciencelearner.com/importerror-cannot-import-name-get_config-from-tensorflow-python-eager-context/
+
+Laurikkala (outliers): https://asset-pdf.scinapse.io/prod/80011902/80011902.pdf
+
+Dataset acute nao us o y. corrigir: comentar linha 40 meta_atributos.py e linha 23, 42, 64, 77, 89 calcula_ma.py
+
+Calculo IQR antigo
+def metric_perc_outllier(X):
+
+    //Xc = X[:,0]
+
+    fator = 1.5
+    q3, q1 = np.percentile(Xc, [75, 25])
+
+    iqr = q3 - q1
+
+    lowpass = q1 - (iqr * fator)
+    highpass = q3 + (iqr * fator)
+
+    cc = 0
+    for i in Xc:
+        if i > lowpass and i < highpass:
+            cc = cc + 1
+    per = (1 - cc/int(Xc.size))
+    
+    return per
