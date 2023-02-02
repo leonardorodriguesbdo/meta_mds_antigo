@@ -1,0 +1,20 @@
+As técnicas de visualização de dados possuem um enorme potencial para análise, suma-
+rização, compreensão a fim de facilitar a extração de informação.  ́Areas recentes como
+Visual Analytics e Ciência de Dados evidenciam a sua importância, principalmente para
+analisar complexos conjuntos de dados. Nesse sentido, as técnicas de Projeção Multi-
+dimensional são particularmente utilizadas para análise de conjuntos de dados de alta
+dimensionalidade, em razão de sua escalabilidade no tocante a quantidade de atributos/-
+dimensões. Todavia, definir qual a técnica mais adequada para encontrar padrões visuais
+de informação em um, ou vários, conjuntos de dados não é uma tarefa trivial. Ainda
+que os trabalhos na literatura testem e comparem diferentes técnicas em conjuntos de
+dados com características distintas, não o fazem de modo sistematizado para facilitar
+uma escolha para o usuário. Nesse sentido, a presente proposta visa utilizar o conceito
+de meta-aprendizagem para recomendar/classificar as projeções multidimensionais con-
+siderando suas respectivas métricas de avaliação em conjuntos de dados distintos. A
+meta-aprendizagem  ́e um conceito que auxilia na resolução de problemas de seleção de
+algoritmos, sendo adequada para ajudar o usuário na tomada de decisão para escolha das
+melhores técnicas de redução de dimensionalidade a serem utilizadas. Em específico, a
+abordagem proposta busca caracterizar os conjuntos de dados e mensurar o desempenho
+das técnicas de redução de dimensionalidade a fim de criar os meta-dados necessários
+para alimentar a base de conhecimento, dando origem ao conjunto de meta-recursos que
+alimentará o processo de meta-aprendizagem.
