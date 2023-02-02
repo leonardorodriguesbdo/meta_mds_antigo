@@ -1,0 +1,4 @@
+Dataset: secom
+Tipo: tabular
+Instancias: 19.818360608721783
+Dimensões: 9.207014320177533

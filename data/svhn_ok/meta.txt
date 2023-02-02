@@ -1,0 +1,4 @@
+Dataset: svhn
+Tipo: imagem
+Instancias: 19.515699838284043
+Dimensões: 10.001408194392809

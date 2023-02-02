@@ -1,0 +1,4 @@
+Dataset: cifar10
+Tipo: imagem
+Instancias: 21.66622400280318
+Dimensões: 10.001408194392809

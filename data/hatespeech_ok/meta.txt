@@ -1,0 +1,4 @@
+Dataset: hatespeech
+Tipo: texto
+Instancias: 18.297149135157543
+Dimensões: 6.6582114827517955

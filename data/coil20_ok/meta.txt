@@ -1,0 +1,4 @@
+Dataset: coil20
+Tipo: imagem
+Instancias: 19.135709286104397
+Dimensões: 8.647458426454921

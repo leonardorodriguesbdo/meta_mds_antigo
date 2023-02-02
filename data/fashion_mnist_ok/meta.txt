@@ -1,0 +1,4 @@
+Dataset: fashion_mnist
+Tipo: imagem
+Instancias: 21.16545662949845
+Dimensões: 9.61654884377899

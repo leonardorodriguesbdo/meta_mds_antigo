@@ -1,0 +1,4 @@
+Dataset: cnae9
+Tipo: texto
+Instancias: 19.81828258345198
+Dimensões: 9.7431513941125

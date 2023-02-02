@@ -1,0 +1,4 @@
+Dataset: sms
+Tipo: texto
+Instancias: 18.671416672023504
+Dimensões: 8.968666793195208

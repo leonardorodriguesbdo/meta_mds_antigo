@@ -1,0 +1,4 @@
+Dataset: sentiment
+Tipo: texto
+Instancias: 19.068022478592823
+Dimensões: 7.651051691178929

@@ -1,0 +1,4 @@
+Dataset: orl
+Tipo: imagem
+Instancias: 17.273212809854336
+Dimensões: 8.632995197142959

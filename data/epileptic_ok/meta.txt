@@ -1,0 +1,4 @@
+Dataset: epileptic
+Tipo: tabular
+Instancias: 19.965079671685498
+Dimensões: 7.483815777264256

@@ -1,0 +1,4 @@
+Dataset: seismic
+Tipo: tabular
+Instancias: 13.920352855415082
+Dimensões: 4.643856189774724

@@ -1,0 +1,4 @@
+Dataset: hiva
+Tipo: tabular
+Instancias: 22.245943751435487
+Dimensões: 10.659995892429977

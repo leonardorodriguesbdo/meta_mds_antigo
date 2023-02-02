@@ -1,0 +1,4 @@
+Dataset: imdb
+Tipo: texto
+Instancias: 21.11743511463551
+Dimensões: 9.453270634010623

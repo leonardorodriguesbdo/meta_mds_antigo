@@ -1,0 +1,4 @@
+Dataset: har
+Tipo: tabular
+Instancias: 18.65345740033252
+Dimensões: 9.134426320220927

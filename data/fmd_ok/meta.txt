@@ -1,0 +1,4 @@
+Dataset: fmd
+Tipo: imagem
+Instancias: 20.546412195119352
+Dimensões: 10.585901449690772

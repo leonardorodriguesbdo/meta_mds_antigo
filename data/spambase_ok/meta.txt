@@ -1,0 +1,4 @@
+Dataset: spambase
+Tipo: texto
+Instancias: 18.000621755267986
+Dimensões: 5.857980995127572

@@ -1,0 +1,4 @@
+Dataset: libra8
+Tipo: tabular
+Instancias: 13.568668693380506
+Dimensões: 6.507794640198696

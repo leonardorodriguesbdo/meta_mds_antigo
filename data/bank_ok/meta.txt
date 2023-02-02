@@ -1,0 +1,4 @@
+Dataset: bank
+Tipo: tabular
+Instancias: 16.98500803813217
+Dimensões: 6.0
