@@ -1,0 +1,4 @@
+dataset_name,projection_name,projection_parameters,metric_pq_neighborhood_hit_k_07,metric_pq_trustworthiness_k_07,metric_pq_continuity_k_07,metric_pq_normalized_stress,metric_pq_shepard_diagram_correlation,elapsed_time
+bank,"AutoencoderProjection-{'model_size': <ModelSize.SMALL: 0>, 'n_components': 2}",,0.8522861305765628,0.8569332210938042,0.9122196473561195,1.3001690596063034,0.552905648513255,16.366232800000002
+bank,"AutoencoderProjection-{'model_size': <ModelSize.MEDIUM: 1>, 'n_components': 2}",,0.8567959481024076,0.9467412977325158,0.8818809950218552,10.138612383848665,0.40402827728097424,39.383051200000004
+bank,"AutoencoderProjection-{'model_size': <ModelSize.LARGE: 2>, 'n_components': 2}",,0.8565878026781378,0.95434941274804,0.9109811075504752,2.8907730684419106,0.3905235808099844,34.2592442

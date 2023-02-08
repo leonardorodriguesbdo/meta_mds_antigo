@@ -9,16 +9,68 @@ import scipy as sci
 from scipy import stats, spatial
 import calcula_ma as cma
 import calcula_md as cmd
-import metrics
+from metrics import *
 import vp
 import math
 from sklearn import datasets
 from sklearn.decomposition import NMF
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import ParameterGrid
 from sys import stdout
+import projections
+import joblib
 
-def load_dataset(dataset_name):
+
+def lista_projections():
+    return sorted(projections.all_projections.keys())
+    
+def run_eval(dataset_name, projection_name, X, y, output_dir):
+    # TODO: add noise adder
+    global DISTANCES
+
+    dc_results = dict()
+    pq_results = dict()
+    projected_data = dict()
+
+    dc_results['original'] = eval_dc_metrics(
+       X=X, y=y, dataset_name=dataset_name, output_dir=output_dir)
+    
+    proj_tuple = projections.all_projections[projection_name]
+    proj = proj_tuple[0]
+    grid_params = proj_tuple[1]
+    
+    grid = ParameterGrid(grid_params)
+    
+    for params in grid:
+        id_run = proj.__class__.__name__ + '-' + str(params)
+        proj.set_params(**params)
+
+        print('-----------------------------------------------------------------------')
+        print(projection_name, id_run)
+
+        X_new, y_new, result = projections.run_projection(
+            proj, X, y, id_run, dataset_name, output_dir)
+        
+        print(result)
+        pq_results[id_run] = result
+        projected_data[id_run] = dict()
+        projected_data[id_run]['X'] = X_new
+        projected_data[id_run]['y'] = y_new
+
+    results_to_dataframe(dc_results, dataset_name).to_csv(
+        '%s/%s_%s_dc_results.csv' % (output_dir, dataset_name, projection_name), index=None)
+    results_to_dataframe(pq_results, dataset_name).to_csv(
+        '%s/%s_%s_pq_results.csv' % (output_dir, dataset_name, projection_name), index=None)
+    joblib.dump(projected_data, '%s/%s_%s_projected.pkl' %
+                (output_dir, dataset_name, projection_name))
+    joblib.dump(DISTANCES, '%s/%s_%s_distance_files.pkl' %
+                (output_dir, dataset_name, projection_name))
+    
+
+
+
+def carrega_dataset(dataset_name):
         data_dir = os.path.join('data', dataset_name)
 
         #Pegar o meta-atributo MA1
@@ -47,7 +99,7 @@ def vetor_dist_normalizado(d):
     df_min_max_scaled = (df_min_max_scaled - df_min_max_scaled.min()) / (df_min_max_scaled.max() - df_min_max_scaled.min())     
     return df_min_max_scaled
 
-def meta_atributos(nome, tipo, DsN, y, wl):
+def meta_atributos(nome, tipo, DsN, yN, wl, projection_name):
     #X, y = load_dataset('libra8')
         arredonda = 4
 
@@ -56,7 +108,7 @@ def meta_atributos(nome, tipo, DsN, y, wl):
 
         # MA_1 tipo de dado
         ma1 = tipo #cma.tipo_dado(t)
-
+        
         # MA_2 numero de linhas
         #ma2 = cma.total_linhas(X) 
         ma2 = round(cma.total_linhas(DsN), arredonda) #round(math.log(cma.total_linhas(Ds), 2), arredonda)
@@ -72,7 +124,7 @@ def meta_atributos(nome, tipo, DsN, y, wl):
         ma5 = round(cma.razao_dispersao(DsN), arredonda)
 
         # MA_6 porcentagem de outiliers
-        ma6 = round(cma.porc_outiliers(DsN, y)/ cma.total_linhas(X), arredonda)
+        ma6 = round(cma.porc_outiliers(DsN, yN)/ cma.total_linhas(X), arredonda)
 
         # Retorna dataset apenas dos atributos continuos
         DsContinuo = cma.dados_continuos(DsN)
@@ -138,6 +190,10 @@ def meta_atributos(nome, tipo, DsN, y, wl):
         md18 = round((y3/y), arredonda)
         # MD_19 percentual escore-z absoluto intervalo [3,--)'
         md19 = round((y4/y), arredonda)
+        
+        # Extrai métricas de qualidade para cada projeção no dataset
+        for p in projection_name:
+            run_eval(d, p, DsN, yN, output_dir)
 
         dados.append([ma,ma1, ma2, ma3, ma4, ma5, ma6, ma7, ma8, ma9, md1, md2, md3, md4, md5, md6, md7, md8, md9, md10, md11, md12, md13, md14, md15, md16, md17, md18, md19])
 
@@ -145,6 +201,8 @@ def meta_atributos(nome, tipo, DsN, y, wl):
 
 if __name__ == '__main__':
     path = os.getcwd() + '\data'
+    projection_name = lista_projections()
+    output_dir = os.path.join('metricas_quali')
     datasets = os.listdir(path)
     dados = []
     #datasets = ['bank']
@@ -166,13 +224,14 @@ if __name__ == '__main__':
         # Inicia o timer do processamento
         time_proc_bd = timeit.Timer("meta_atributos", "from __main__ import meta_atributos")
         
-        X, y, tipo, nome = load_dataset(d)
+        X, y, tipo, nome = carrega_dataset(d)
 
         stdout.write(nome)
         stdout.write(' .....')
         print('.')
 
-        DsN = pd.DataFrame(X)
+        DsN = X #pd.DataFrame(X)
+        yN = y #pd.DataFrame(y) 
         #Ds[X.shape[1]] = y
         #DsN = Ds.apply(lambda x: (x-x.mean())/ x.std(), axis=0)
 
@@ -185,7 +244,7 @@ if __name__ == '__main__':
         wl = vetor_dist_normalizado(w)
         #print(wl)
        
-        meta_atributos(nome, tipo, DsN, y, wl)
+        meta_atributos(nome, tipo, DsN, yN, wl, projection_name)
 
         #renomear a pasta sinalizando seu processamento
         nome_antigo = path + '\\' + nome

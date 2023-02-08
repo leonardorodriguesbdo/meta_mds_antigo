@@ -12,17 +12,20 @@ def tipo_dado(t):
 def total_objetos(Ds):
     return Ds.size
 
-# calcula MA_2
+# calcula MA_2 (samples)
 def total_linhas(Ds):
     return Ds.shape[0]
 
-# calcula MA_3
+# calcula MA_3 (Features)
 def total_dimensoes(Ds):
     # junta X com y formando um unico dataframe
     #Ds = pd.DataFrame(X)
     #Ds[X.shape[1]] = y
 
     return Ds.shape[1]
+
+def metric_dc_num_classes(y):
+    return len(np.unique(y))
 
 # calcula MA_4
 def taxa_dim_intrinseca(Ds):
@@ -94,6 +97,7 @@ def curt_media_atrib_continuos(DsC):
     return np.mean(curt)
 
 def dados_continuos(Ds):
+    Ds = pd.DataFrame(Ds)
     cf = 0
     cc = 0
     discrete = 0  #Nem precisa *

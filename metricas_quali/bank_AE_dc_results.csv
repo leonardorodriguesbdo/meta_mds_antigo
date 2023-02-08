@@ -1,0 +1,2 @@
+dataset_name,projection_name,projection_parameters,elapsed_time,metric_dc_dataset_is_balanced,metric_dc_intrinsic_dim,metric_dc_neighborhood_hit_k_07,metric_dc_num_classes,metric_dc_num_features,metric_dc_num_samples,metric_dc_sparsity_ratio
+bank,original,,0.0,False,29,0.8733088184278083,2,63,2059,0.7040172066884063

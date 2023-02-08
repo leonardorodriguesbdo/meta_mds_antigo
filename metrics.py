@@ -17,7 +17,10 @@ N_SAMPLES = 0
 DISTANCES = dict()
 
 def cleanup_id_run(id_run):
-    return id_run.replace(' ', '').replace("'", "").replace(':', '').replace('{', '').replace('}', '').replace('/', '').replace(',', '').replace('-', '').replace('.', '')
+    #return id_run.replace(' ', '').replace("'", "").replace(':', '').replace('{', '').replace('}', '').replace('/', '').replace(',', '').replace('-', '').replace('.', '')
+    # correção para rodar no windows: substitui '|' por '-', '<' por '[', e '>' por ']'
+    return id_run.replace(' ', '').replace("'", "").replace(':', '').replace('{', '').replace('}', '').replace('/', '').replace(',', '').replace('-', '').replace('.', '').replace('<','').replace('>','')
+    
 
 
 def eval_dc_metrics(**kwargs):
@@ -140,14 +143,14 @@ def metric_dc_dataset_is_balanced(y):
 
 
 def metric_dc_num_samples(X):
-    return math.log(X.size, 2.0)
+    #return math.log(X.size, 2.0)
     #return math.log(X.shape[0], 2.0)
-    #return X.shape[0]
+    return X.shape[0]
 
 
 def metric_dc_num_features(X):
-    return math.log(X.shape[1] + 1, 2.0)
-    #return X.shape[1]
+    #return math.log(X.shape[1] + 1, 2.0)
+    return X.shape[1]
 
 
 def metric_dc_num_classes(y):
@@ -185,36 +188,36 @@ def metric_neighborhood_hit(X, y, k):
     return np.mean(np.mean((y[neighbors] == np.tile(y.reshape((-1, 1)), k)).astype('uint8'), axis=1))
 
 
-def metric_dc_neighborhood_hit_k_03(X, y):
-    return metric_neighborhood_hit(X, y, 3)
+#def metric_dc_neighborhood_hit_k_03(X, y):
+#    return metric_neighborhood_hit(X, y, 3)
 
 
-def metric_dc_neighborhood_hit_k_05(X, y):
-    return metric_neighborhood_hit(X, y, 5)
+#def metric_dc_neighborhood_hit_k_05(X, y):
+#    return metric_neighborhood_hit(X, y, 5)
 
 
 def metric_dc_neighborhood_hit_k_07(X, y):
     return metric_neighborhood_hit(X, y, 7)
 
 
-def metric_dc_neighborhood_hit_k_11(X, y):
-    return metric_neighborhood_hit(X, y, 11)
+#def metric_dc_neighborhood_hit_k_11(X, y):
+#    return metric_neighborhood_hit(X, y, 11)
 
 
-def metric_pq_neighborhood_hit_k_03(X, y):
-    return metric_neighborhood_hit(X, y, 3)
+#def metric_pq_neighborhood_hit_k_03(X, y):
+#    return metric_neighborhood_hit(X, y, 3)
 
 
-def metric_pq_neighborhood_hit_k_05(X, y):
-    return metric_neighborhood_hit(X, y, 5)
+#def metric_pq_neighborhood_hit_k_05(X, y):
+#    return metric_neighborhood_hit(X, y, 5)
 
 
 def metric_pq_neighborhood_hit_k_07(X, y):
     return metric_neighborhood_hit(X, y, 7)
 
 
-def metric_pq_neighborhood_hit_k_11(X, y):
-    return metric_neighborhood_hit(X, y, 11)
+#def metric_pq_neighborhood_hit_k_11(X, y):
+#    return metric_neighborhood_hit(X, y, 11)
 
 
 def metric_trustworthiness(k, id_run):
@@ -275,36 +278,36 @@ def metric_continuity(k, id_run):
     return float((1 - (2 / (n * k * (2 * n - 3 * k - 1)) * sum_i)).squeeze())
 
 
-def metric_pq_trustworthiness_k_03(id_run):
-    return metric_trustworthiness(3, id_run)
+#def metric_pq_trustworthiness_k_03(id_run):
+#    return metric_trustworthiness(3, id_run)
 
 
-def metric_pq_trustworthiness_k_05(id_run):
-    return metric_trustworthiness(5, id_run)
+#def metric_pq_trustworthiness_k_05(id_run):
+#    return metric_trustworthiness(5, id_run)
 
 
 def metric_pq_trustworthiness_k_07(id_run):
     return metric_trustworthiness(7, id_run)
 
 
-def metric_pq_trustworthiness_k_11(id_run):
-    return metric_trustworthiness(11, id_run)
+#def metric_pq_trustworthiness_k_11(id_run):
+#    return metric_trustworthiness(11, id_run)
 
 
-def metric_pq_continuity_k_03(id_run):
-    return metric_continuity(3, id_run)
+#def metric_pq_continuity_k_03(id_run):
+#    return metric_continuity(3, id_run)
 
 
-def metric_pq_continuity_k_05(id_run):
-    return metric_continuity(5, id_run)
+#def metric_pq_continuity_k_05(id_run):
+#    return metric_continuity(5, id_run)
 
 
 def metric_pq_continuity_k_07(id_run):
     return metric_continuity(7, id_run)
 
 
-def metric_pq_continuity_k_11(id_run):
-    return metric_continuity(11, id_run)
+#def metric_pq_continuity_k_11(id_run):
+#    return metric_continuity(11, id_run)
 
 
 def metric_pq_normalized_stress(id_run):
