@@ -200,7 +200,7 @@ def meta_atributos(nome, tipo, DsN, yN, wl, projection_name):
  
 
 if __name__ == '__main__':
-    path = os.getcwd() + '\data'
+    path = os.path.join(os.getcwd(), 'data')
     projection_name = lista_projections()
     output_dir = os.path.join('metricas_quali')
     datasets = os.listdir(path)
@@ -247,8 +247,8 @@ if __name__ == '__main__':
         meta_atributos(nome, tipo, DsN, yN, wl, projection_name)
 
         #renomear a pasta sinalizando seu processamento
-        nome_antigo = path + '\\' + nome
-        nome_novo = path + '\\' + nome + '_ok'
+        nome_antigo = os.path.join(path, nome) #path + '\\' + nome
+        nome_novo = os.path.join(path, nome + '_ok') #path + '\\' + nome + '_ok'
         os.rename(nome_antigo, nome_novo)
 
         time_proc_bd = time_proc_bd.repeat(repeat = 3, number = 10000)
